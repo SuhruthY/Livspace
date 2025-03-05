@@ -1,53 +1,65 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title th:text="${space.name} + ' - Livspace Application'">Single Space</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" th:href="@{/css/styles.css}">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title th:text="${space.name} + ' - Livspace Application'">Single
+	Space</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<!-- Font Awesome (Use this version instead of the kit) -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+<link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
 <body>
 	<div th:insert="header :: header"></div>
-	
+
 	<br>
-	
-    <div class="container space-container">
-        <!-- Left Section - Image -->
-        <div class="image-container">
-            <img th:src="${space.imageLink}" alt="Space Image">
-        </div>
 
-        <!-- Right Section - Details -->
-        <div class="details-container">
-            <h2 th:text="${space.name}">Space Title</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vulputate dictum quam, non gravida justo ultrices eu.</p>
-            
-            <ul class="details-list">
-                <li><strong>Type:</strong> <span th:text="${space.type}">Luxury</span></li>
-                <li><strong>Style:</strong> <span th:text="${space.style}">Modern</span></li>
-                <li><strong>Dimensions:</strong> <span th:text="${space.width}"></span> x <span th:text="${space.width}"></span></li>
-            </ul>
+	<div class="container space-container">
+		<!-- Left Section - Image -->
+		<div class="image-container">
+			<img th:src="${space.imageLink}" alt="Space Image">
+		</div>
 
-            <!-- Bullet Points -->
-            <ul class="bullet-list">
-                <li>Spacious and well-lit design</li>
-                <li>Perfect for modern interiors</li>
-                <li>Energy-efficient and eco-friendly</li>
-                <li>Customizable layout options</li>
-            </ul>
+		<!-- Right Section - Details -->
+		<div class="details-container">
+			<h2 th:text="${space.name}">Space Title</h2>
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+				Praesent vulputate dictum quam, non gravida justo ultrices eu.</p>
 
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed convallis felis nec felis egestas, et interdum felis ultrices. Curabitur aliquet eros id diam tincidunt pharetra. Phasellus ut odio vitae lacus egestas aliquet.</p>
+			<ul class="details-list">
+				<li><strong>Type:</strong> <span th:text="${space.type}">Luxury</span></li>
+				<li><strong>Style:</strong> <span th:text="${space.style}">Modern</span></li>
+				<li><strong>Dimensions:</strong> <span th:text="${space.width}"></span>
+					x <span th:text="${space.width}"></span></li>
+			</ul>
 
-            <a href="#" class="btn get-quote-btn">Get Quote</a>
-        </div>
-    </div>
-	
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    
-    <br>
-    
-    <div th:insert="footer :: footer"></div>
+			<!-- Bullet Points -->
+			<ul class="bullet-list">
+				<li>Spacious and well-lit design</li>
+				<li>Perfect for modern interiors</li>
+				<li>Energy-efficient and eco-friendly</li>
+				<li>Customizable layout options</li>
+			</ul>
+
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+				convallis felis nec felis egestas, et interdum felis ultrices.
+				Curabitur aliquet eros id diam tincidunt pharetra. Phasellus ut odio
+				vitae lacus egestas aliquet.</p>
+
+			<a href="#" class="btn get-quote-btn">Get Quote</a>
+		</div>
+	</div>
+
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+	<br>
+
+	<div th:insert="footer :: footer"></div>
 </body>
 
 </html>

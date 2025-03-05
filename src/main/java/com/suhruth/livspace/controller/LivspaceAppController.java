@@ -5,13 +5,14 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.suhruth.livspace.exception.ResourceNotFoundException;
 import com.suhruth.livspace.model.LivspaceFull;
@@ -20,7 +21,6 @@ import com.suhruth.livspace.repository.LivspaceFullRepository;
 import com.suhruth.livspace.repository.LivspaceRepository;
 
 @Controller
-@RequestMapping("/spaces")
 public class LivspaceAppController {
 
 	@Autowired
@@ -37,26 +37,45 @@ public class LivspaceAppController {
 		return "index";
 	}
 
-	@GetMapping
+	@GetMapping("/login")
+	public String login(Authentication authentication) {
+
+		if (authentication != null && authentication.isAuthenticated()) {
+			
+			boolean isAdmin = authentication.getAuthorities().stream()
+					.anyMatch(auth -> auth.getAuthority().equalsIgnoreCase("ROLE_ADMIN"));
+			
+			if(isAdmin) {
+				return "redirect:/spaces/dashboard"; 
+			}
+			
+			return "redirect:/spaces"; 
+		}
+		return "/login";
+	}
+
+	@GetMapping("/spaces")
 	public String dashboard(Model model) {
 		model.addAttribute("spaces", livspaceRepo.findAll());
 		return "spaces";
 	}
 
-	@GetMapping("/{id}")
+	@GetMapping("/spaces/{id}")
 	public String space(@PathVariable("id") int id, Model model) {
 		model.addAttribute("space", livspaceRepo.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("Resource with ID " + id + " not found")));
 		return "space";
 	}
 
-	@GetMapping("/dashboard")
+	@PreAuthorize("hasRole('ADMIN')")
+	@GetMapping("/spaces/dashboard")
 	public String overview(Model model) {
 		model.addAttribute("spaces", livspaceEditRepo.findAll(Sort.by(Sort.Direction.ASC, "id")));
 		return "dashboard";
 	}
 
-	@GetMapping("/view/{id}")
+	@PreAuthorize("hasRole('ADMIN')")
+	@GetMapping("/spaces/view/{id}")
 	public String view(@PathVariable("id") int id, Model model) {
 		model.addAttribute("space", livspaceFullRepo.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("Resource with ID " + id + " not found")));
@@ -66,7 +85,8 @@ public class LivspaceAppController {
 		return "action";
 	}
 
-	@GetMapping("/edit/{id}")
+	@PreAuthorize("hasRole('ADMIN')")
+	@GetMapping("/spaces/edit/{id}")
 	public String edit(@PathVariable("id") int id, Model model) {
 		model.addAttribute("space", livspaceFullRepo.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("Resource with ID " + id + " not found")));
@@ -76,14 +96,16 @@ public class LivspaceAppController {
 		return "action";
 	}
 
-	@PostMapping("/save/{id}")
+	@PreAuthorize("hasRole('ADMIN')")
+	@PostMapping("/spaces/save/{id}")
 	public String save(@PathVariable("id") int id, @ModelAttribute LivspaceFull space, Model model) {
 		livspaceFullRepo.save(space);
 		model.addAttribute("spaces", livspaceFullRepo.findAll());
 		return "redirect:/spaces/dashboard";
 	}
-	
-	@GetMapping("/delete/{id}")
+
+	@PreAuthorize("hasRole('ADMIN')")
+	@GetMapping("/spaces/delete/{id}")
 	public String delete(@PathVariable("id") int id, Model model) {
 		livspaceFullRepo.deleteById(id);
 		model.addAttribute("spaces", livspaceFullRepo.findAll());

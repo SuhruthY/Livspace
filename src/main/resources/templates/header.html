@@ -22,12 +22,12 @@
                             <i class="fa-solid fa-home me-1"></i> Home
                         </a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" sec:authorize="isAuthenticated() and hasRole('ADMIN')">
                         <a class="nav-link" href="/spaces/dashboard">
                             <i class="fa-solid fa-table me-1"></i> Dashboard
                         </a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" sec:authorize="isAuthenticated()">
                         <a class="nav-link" href="/spaces">
                             <i class="fa-solid fa-eye me-1"></i> Our Spaces
                         </a>
@@ -41,8 +41,8 @@
 
                 <!-- User Icon (Aligned Right) -->
                 <div class="ms-auto">
-                    <a href="/profile" class="nav-link">
-                        <i class="fa-solid fa-user-circle fa-2x"></i> <!-- Larger User Icon -->
+                    <a href="/" class="nav-link">
+                        <i class="fa-solid fa-user-circle fa-2x"></i>
                     </a>
                 </div>
             </div>

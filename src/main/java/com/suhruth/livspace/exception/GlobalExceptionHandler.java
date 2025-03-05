@@ -14,17 +14,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
-//	@ExceptionHandler(ResourceNotFoundException.class)
-//	public ResponseEntity<Map<String, Object>> handleResourceNotFoundException(ResourceNotFoundException ex) {
-//		Map<String, Object> errorResponse = new HashMap<>();
-//		errorResponse.put("timestamp", LocalDateTime.now());
-//		errorResponse.put("status", HttpStatus.NOT_FOUND.value());
-//		errorResponse.put("error", "Not Found");
-//		errorResponse.put("message", ex.getMessage());
-//
-//		return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
-//	}
-
 	@ResponseStatus(HttpStatus.NOT_FOUND)
 	@ExceptionHandler(Exception.class)
 	public String handleNotFound(Exception e, Model model) {
