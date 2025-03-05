@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Livspace Application</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+
+<link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+
+<body>
+
+	<div th:insert="header :: header"></div>	
+
+	<div class="container mt-4">
+		<h2 class="text-center mb-4">Explore Beautiful Spaces</h2>
+		<div class="row" id="spaceContainer">
+			<!-- Spaces will be dynamically inserted here -->
+		</div>
+		<div class="loading" id="loading">Loading more spaces...</div>
+	</div>
+
+	<script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let loading = false;
+            const scrollThreshold = 0.9;
+            const container = document.getElementById("spaceContainer");
+            const loadingIndicator = document.getElementById("loading");
+
+            function loadSpaces() {
+                if (loading) return;
+                loading = true;
+                loadingIndicator.style.display = "block"; 
+
+                fetch("/api")
+                    .then(response => response.json())
+                    .then(spaces => {
+                        spaces.sort(() => Math.random() - 0.5); // Shuffle data
+
+                        spaces.forEach(space => {
+                            const col = document.createElement("div");
+                            col.className = "col-md-4 mb-4";
+                            col.innerHTML = `
+                                <div class="card shadow-sm" onclick="window.location.href='/spaces/${space.id}'">
+                                    <img src="${space.imageLink}" class="card-img-top" alt="Space Image">
+                                    <div class="card-body">
+                                        <h5 class="card-title">${space.name}</h5>
+                                        <p class="card-text"><strong>Dimensions:</strong> ${space.width} x ${space.length}</p>
+                                        <a href="#" class="btn get-quote-btn">Get Quote</a>
+                                    </div>
+                                </div>
+                            `;
+                            container.appendChild(col);
+                        });
+
+                        loading = false;
+                        loadingIndicator.style.display = "none";
+                    })
+                    .catch(error => {
+                        console.error("Error loading spaces:", error);
+                        loading = false;
+                        loadingIndicator.style.display = "none";
+                    });
+            }
+
+            // Load initial spaces
+            loadSpaces();
+
+            // Infinite scrolling optimization
+            window.addEventListener("scroll", function () {
+                let scrollPosition = window.scrollY + window.innerHeight;
+                let pageHeight = document.body.offsetHeight;
+
+                if (!loading && scrollPosition >= pageHeight * scrollThreshold) {
+                    loadSpaces();
+                }
+            });
+        });
+    </script>
+
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
+	<div th:insert="footer :: footer"></div>
+</body>
+</html>

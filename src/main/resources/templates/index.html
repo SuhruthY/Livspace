@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bootstrap demo</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+<link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+	<div th:insert="header :: header"></div>
+
+	<!-- Carousel Section -->
+	<section id="carouselSection">
+		<div class="container-fluid p-0">
+			<div id="customCarousel" class="carousel slide"
+				data-bs-ride="carousel">
+
+
+				<!-- Carousel Items -->
+				<div class="carousel-inner">
+					<div class="carousel-item active">
+						<div class="carousel-overlay"></div>
+						<img src="/images/carosoule1.png"
+							class="d-block w-100 carousel-img" alt="Slide 1">
+						<div class="carousel-caption top-caption">
+							<h2>Inspiring Innovation</h2>
+							<p>Building creative solutions for a better tomorrow.</p>
+						</div>
+					</div>
+					<div class="carousel-item">
+						<div class="carousel-overlay"></div>
+						<img src="/images/carosoule2.png"
+							class="d-block w-100 carousel-img" alt="Slide 2">
+						<div class="carousel-caption top-caption">
+							<h2>Empowering Change</h2>
+							<p>Transforming ideas into impactful realities.</p>
+						</div>
+					</div>
+					<div class="carousel-item">
+						<div class="carousel-overlay"></div>
+						<img src="/images/carosoule3.png"
+							class="d-block w-100 carousel-img" alt="Slide 3">
+						<div class="carousel-caption top-caption">
+							<h2>Future-Ready Solutions</h2>
+							<p>Leading the way with cutting-edge technologies.</p>
+						</div>
+					</div>
+				</div>
+
+				<!-- Controls -->
+				<a class="carousel-control-prev" href="#customCarousel"
+					role="button" data-bs-slide="prev"> <span
+					class="carousel-control-prev-icon" aria-hidden="true"></span> <span
+					class="visually-hidden">Previous</span>
+				</a> <a class="carousel-control-next" href="#customCarousel"
+					role="button" data-bs-slide="next"> <span
+					class="carousel-control-next-icon" aria-hidden="true"></span> <span
+					class="visually-hidden">Next</span>
+				</a>
+			</div>
+		</div>
+	</section>
+
+	<!-- Image Grid Section -->
+	<section class="image-grid-section">
+		<div class="container">
+			<h2>Explore Our Gallery</h2>
+			<p>Discover a collection of stunning visuals that inspire and
+				captivate.</p>
+
+			<div class="row">
+				<div class="col-md-4 col-sm-6 mb-3">
+					<div class="image-grid-item">
+						<img src="/images/grid1.png" alt="Gallery Image">
+						<div class="image-overlay">
+							<h3>Inspiring Journey</h3>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4 col-sm-6 mb-3">
+					<div class="image-grid-item">
+						<img src="/images/grid2.png" alt="Gallery Image">
+						<div class="image-overlay">
+							<h3>Power of Nature</h3>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4 col-sm-6 mb-3">
+					<div class="image-grid-item">
+						<img src="/images/grid3.png" alt="Gallery Image">
+						<div class="image-overlay">
+							<h3>Moments of Joy</h3>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4 col-sm-6 mb-3">
+					<div class="image-grid-item">
+						<img src="/images/grid4.png" alt="Gallery Image">
+						<div class="image-overlay">
+							<h3>Serene Reflections</h3>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4 col-sm-6 mb-3">
+					<div class="image-grid-item">
+						<img src="/images/grid5.png" alt="Gallery Image">
+						<div class="image-overlay">
+							<h3>Boundless Creativity</h3>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4 col-sm-6 mb-3">
+					<div class="image-grid-item">
+						<img src="/images/grid6.png" alt="Gallery Image">
+						<div class="image-overlay">
+							<h3>Unstoppable Dreams</h3>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<br>
+
+	<!-- Contact Section -->
+	<section id="contact" class="contact-section text-center">
+		<div class="contact-form-wrapper">
+			<h2>Contact Us</h2>
+			<p>We'd love to hear from you! Fill out the form below.</p>
+
+			<form class="contact-form">
+				<div class="mb-3 input-group">
+					<span class="input-group-text"><i class="fas fa-user"></i></span> <input
+						type="text" class="form-control" placeholder="Your Name" required>
+				</div>
+
+				<div class="mb-3 input-group">
+					<span class="input-group-text"><i class="fas fa-envelope"></i></span>
+					<input type="email" class="form-control" placeholder="Your Email"
+						required>
+				</div>
+
+				<div class="mb-3 input-group">
+					<span class="input-group-text"><i class="fas fa-comment"></i></span>
+					<textarea class="form-control" rows="4" placeholder="Your Message"
+						required></textarea>
+				</div>
+
+				<button type="submit" class="btn btn-danger w-100">Send
+					Message</button>
+			</form>
+
+		</div>
+	</section>
+	
+	<br>
+	<br>
+	
+	<div th:insert="footer :: footer"></div>
+
+	<!-- Bootstrap JS -->
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+		crossorigin="anonymous"></script>
+</body>
+</html>

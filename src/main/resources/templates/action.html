@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title
+	th:text="${isEdit} ? 'Edit Interior Details' : 'View Interior Details'"></title>
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+
+<!-- Font Awesome -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+<link rel="stylesheet" th:href="@{/css/styles.css}">
+
+
+</head>
+<body>
+
+	<div th:insert="header :: header"></div>
+
+	<div class="action-container">
+		<h2 class="text-center"
+			th:text="${isEdit} ? 'Edit Interior Details' : 'View Interior Details'"></h2>
+		<hr>
+
+		<form th:action="@{/spaces/save/{id}(id=${space.id})}"
+			method="post" th:object="${space}">
+			<div class="row">
+				<!-- Left Column -->
+				<div class="col-md-6">
+					<div class="form-group">
+						<label><i class="fa-solid fa-hashtag"></i> ID:</label> <input
+							type="text" class="form-control" th:field="*{id}" disabled>
+					</div>
+
+					<div class="form-group">
+						<label><i class="fa-solid fa-signature"></i> Name:</label> <input
+							type="text" class="form-control" th:field="*{name}"
+							th:disabled="${!isEdit}">
+					</div>
+
+					<div class="form-group">
+						<label><i class="fa-solid fa-tags"></i> Type:</label> <select
+							class="form-control" th:field="*{type}" th:disabled="${!isEdit}">
+							<option value="" disabled>Select Type</option>
+							<option th:each="t : ${typeList}" th:value="${t}" th:text="${t}"
+								th:selected="${space.type == t}"></option>
+						</select>
+					</div>
+
+					<div class="form-group">
+						<label><i class="fa-solid fa-paLette"></i> Style:</label> <select
+							class="form-control" th:field="*{style}" th:disabled="${!isEdit}">
+							<option value="" disabled>Select Style</option>
+							<option th:each="s : ${styleList}" th:value="${s}" th:text="${s}"
+								th:selected="${space.style == s}"></option>
+						</select>
+					</div>
+
+
+					<div class="form-group">
+						<label><i class="fa-solid fa-ruler-combined"></i>
+							Dimensions:</label>
+						<div class="d-flex position-relative">
+							<input type="number" id="width" class="form-control mx-1"
+								placeholder="Width" th:disabled="${!isEdit}" th:field="*{width}">
+							<input type="number" id="height" class="form-control mx-1"
+								placeholder="Height" th:disabled="${!isEdit}"
+								th:field="*{length}">
+						</div>
+					</div>
+
+					<!-- Latitude & Longitude Inputs -->
+					<div class="form-group">
+						<label><i class="fa-solid fa-location-dot"></i> GPS
+							Coordinates:</label>
+						<div class="d-flex">
+							<input type="number" id="latitude" class="form-control mx-1"
+								placeholder="Latitude" step="0.0001" th:disabled="${!isEdit}"
+								th:field="*{latitude}"> <input type="number"
+								id="longitude" class="form-control mx-1" placeholder="Longitude"
+								step="0.0001" th:disabled="${!isEdit}" th:field="*{longitude}">
+						</div>
+					</div>
+
+				</div>
+
+				<!-- Right Column -->
+				<div class="col-md-6">
+					<div class="form-group">
+						<label><i class="fa-solid fa-volume-high"></i> Acoustic
+							Insulation Rating (dB):</label> <input type="number" class="form-control"
+							th:field="*{acousticInsulationRating}" th:disabled="${!isEdit}">
+					</div>
+
+					<div class="form-group">
+						<label><i class="fa-solid fa-temperature-high"></i>
+							Thermal Insulation Efficiency (R-Value):</label> <input type="number"
+							class="form-control" th:field="*{thermalInsulationEfficiency}"
+							th:disabled="${!isEdit}">
+					</div>
+
+					<div class="form-group">
+						<label><i class="fa-solid fa-water"></i> Humidity
+							Resistance (%):</label> <input type="number" class="form-control"
+							th:field="*{humidityResistance}" th:disabled="${!isEdit}">
+					</div>
+
+					<div class="form-group">
+						<label><i class="fa-solid fa-heart"></i> Customer Interest
+							Score:</label> <input type="number" class="form-control"
+							th:field="*{customerInterestScore}" step="0.1" min=0 max=10
+							th:disabled="${!isEdit}">
+					</div>
+
+					<div class="form-group">
+						<label><i class="fa-solid fa-calendar-check"></i> Last
+							Payment Date:</label> <input type="date" class="form-control"
+							th:field="*{lastPaymentDate}" th:disabled="${!isEdit}">
+					</div>
+
+					<div class="form-group">
+						<label><i class="fa-solid fa-money-bill-wave"></i> Pending
+							Dues ($):</label> <input type="number" class="form-control"
+							th:field="*{pendingDues}" th:disabled="${!isEdit}" min=0>
+					</div>
+				</div>
+			</div>
+
+			<!-- Image Link (Editable) -->
+			<div class="form-group">
+				<label><i class="fa-solid fa-image"></i> Image Link:</label> <input
+					type="text" class="form-control" th:field="*{imageLink}"
+					th:disabled="${!isEdit}">
+			</div>
+
+			<!-- Buttons -->
+			<div class="btn-container">
+				<a href="/spaces/dashboard" class="btn btn-secondary"><i
+					class="fa-solid fa-arrow-left"></i> Back</a>
+				<button type="submit" class="btn btn-primary" th:if="${isEdit}">
+					<i class="fa-solid fa-save"></i> Save
+				</button>
+			</div>
+		</form>
+	</div>
+
+	<div th:insert="footer :: footer"></div>
+
+</body>
+</html>

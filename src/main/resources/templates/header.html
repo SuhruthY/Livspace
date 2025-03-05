@@ -1,0 +1,51 @@
+<header th:fragment="header">
+    <nav class="navbar navbar-expand-lg custom-navbar">
+        <div class="container-fluid">
+            <!-- Brand Logo with Font Awesome Icon -->
+            <a class="navbar-brand d-flex align-items-center" href="/">
+                <i class="fa-solid fa-gem me-2"></i> <!-- Font Awesome Icon -->
+                <span>Livspace</span>
+            </a>
+
+            <!-- Navbar Toggle Button -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Navbar Links -->
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-3">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">
+                            <i class="fa-solid fa-home me-1"></i> Home
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/spaces/dashboard">
+                            <i class="fa-solid fa-table me-1"></i> Dashboard
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/spaces">
+                            <i class="fa-solid fa-eye me-1"></i> Our Spaces
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/#contact">
+                            <i class="fa-solid fa-envelope me-1"></i> Contact
+                        </a>
+                    </li>
+                </ul>
+
+                <!-- User Icon (Aligned Right) -->
+                <div class="ms-auto">
+                    <a href="/profile" class="nav-link">
+                        <i class="fa-solid fa-user-circle fa-2x"></i> <!-- Larger User Icon -->
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
